@@ -1,8 +1,3 @@
-# Azure Function secrets — never commit
-azure-function/local.settings.json
-azure-function/bin/
-azure-function/obj/
-
 # Framer backup — not needed in repo
 Landing.html.framer-original.backup
 Landing_files/
@@ -11,4 +6,3 @@ Landing_files/
 .DS_Store
 Thumbs.db
 *.suo
-.vscode/

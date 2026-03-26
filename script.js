@@ -56,7 +56,7 @@ function updateLanguageButtons() {
 // ============================================================
 
 // Replace this URL after deploying the Azure Function
-const LEAD_API_URL = 'https://YOUR_FUNCTION_APP.azurewebsites.net/api/leads';
+const LEAD_API_URL = 'https://alugio-alpha-leadcapture-fqf6dje7fba9e6fe.westus2-01.azurewebsites.net/api/leads';
 
 const MESSAGES = {
     pt: {
