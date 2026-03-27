@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(currentLang);
     updateLanguageButtons();
     initLeadForm();
+    initHamburger();
 });
 
 document.getElementById('lang-pt').addEventListener('click', () => {
@@ -49,6 +50,34 @@ function applyLanguage(lang) {
 function updateLanguageButtons() {
     document.getElementById('lang-pt').classList.toggle('active', currentLang === 'pt');
     document.getElementById('lang-en').classList.toggle('active', currentLang === 'en');
+    const mPT = document.getElementById('lang-pt-mobile');
+    const mEN = document.getElementById('lang-en-mobile');
+    if (mPT) mPT.classList.toggle('active', currentLang === 'pt');
+    if (mEN) mEN.classList.toggle('active', currentLang === 'en');
+}
+
+function initHamburger() {
+    const btn = document.getElementById('hamburger');
+    const nav = document.getElementById('main-nav');
+
+    btn.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close menu when a nav link is clicked
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    // Mobile language buttons
+    const mPT = document.getElementById('lang-pt-mobile');
+    const mEN = document.getElementById('lang-en-mobile');
+    if (mPT) mPT.addEventListener('click', () => { setLanguage('pt'); });
+    if (mEN) mEN.addEventListener('click', () => { setLanguage('en'); });
 }
 
 // ============================================================

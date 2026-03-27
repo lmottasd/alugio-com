@@ -1,10 +1,9 @@
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "azure-function", "azure-function", "{482E2A5A-7614-4FD6-5D06-8CDD9AB97928}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeadCapture", "azure-function\LeadCapture.csproj", "{594C8C16-965F-60E3-9081-07C254BB0043}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "alugio-com", "alugio-com.csproj", "{594C8C16-965F-60E3-9081-07C254BB0043}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,9 +18,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{594C8C16-965F-60E3-9081-07C254BB0043} = {482E2A5A-7614-4FD6-5D06-8CDD9AB97928}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {13E09B16-7775-4FE7-AE5D-4E78DC9C2B9E}

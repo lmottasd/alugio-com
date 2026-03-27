@@ -78,7 +78,8 @@ nav a:hover {
     border-left: 1px solid #eee;
 }
 
-.language-toggle button {
+.language-toggle button,
+.language-toggle-mobile button {
     background: none;
     border: none;
     cursor: pointer;
@@ -89,13 +90,15 @@ nav a:hover {
     border-radius: 4px;
 }
 
-.language-toggle button.active {
+.language-toggle button.active,
+.language-toggle-mobile button.active {
     background: #7c3aed;
     color: white;
     font-weight: 600;
 }
 
-.language-toggle button:hover:not(.active) {
+.language-toggle button:hover:not(.active),
+.language-toggle-mobile button:hover:not(.active) {
     background: #f0f0f0;
 }
 
@@ -120,7 +123,7 @@ nav a:hover {
 
 .hero h1 {
     font-size: 2.5rem;
-    color: #1a1a1a;
+    color: slateblue;
     margin-bottom: 1rem;
     line-height: 1.2;
 }
@@ -132,6 +135,11 @@ nav a:hover {
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.hero-subtitle {
+    font-size: 1.32rem;
+    font-weight: 700;
 }
 
 .hero-tagline {
@@ -560,6 +568,44 @@ footer p {
     margin-bottom: 0.5rem;
 }
 
+/* ----- Hamburger Button ------------------------------------ */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    margin-left: auto;
+}
+
+.language-toggle-mobile {
+    display: none;
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 /* ----- Utilities ------------------------------------------- */
 .hidden {
     display: none;
@@ -577,22 +623,35 @@ footer p {
         font-size: 1.8rem;
     }
 
-    header {
-        flex-direction: column;
-        gap: 1rem;
+    .hamburger {
+        display: flex;
     }
 
-    nav {
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
-
+    nav,
     .language-toggle {
-        margin-left: 0;
-        padding-left: 0;
-        border-left: none;
-        width: 100%;
-        justify-content: center;
+        display: none;
+    }
+
+    nav.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        border-bottom: 1px solid #eee;
+        padding: 1rem 2rem;
+        gap: 1.25rem;
+        z-index: 99;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    nav.open .language-toggle-mobile {
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem 0 0;
+        border-top: 1px solid #eee;
     }
 
     .features-grid {

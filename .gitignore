@@ -6,3 +6,9 @@ Landing_files/
 .DS_Store
 Thumbs.db
 *.suo
+
+# Visual Studio
+.vs/
+bin/
+obj/
+Properties/
