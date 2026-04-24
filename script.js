@@ -259,7 +259,7 @@ function initTestimonials() {
     let timer = null;
 
     function perPage() {
-        return window.innerWidth <= 768 ? 1 : 3;
+        return window.innerWidth <= 768 ? 1 : 2;
     }
 
     function pageCount() {
