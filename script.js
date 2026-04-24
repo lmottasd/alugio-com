@@ -3,15 +3,39 @@
 // ============================================================
 
 const STORAGE_KEY = 'alugio_language';
-const DEFAULT_LANG = 'pt';
+const SUPPORTED_LANGS = ['pt', 'en'];
+const FALLBACK_LANG = 'pt';
 
-let currentLang = localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG;
+function detectInitialLanguage() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (SUPPORTED_LANGS.includes(stored)) return stored;
+
+    const candidates = navigator.languages && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || ''];
+
+    for (const raw of candidates) {
+        const tag = (raw || '').toLowerCase().split('-')[0];
+        if (SUPPORTED_LANGS.includes(tag)) {
+            localStorage.setItem(STORAGE_KEY, tag);
+            return tag;
+        }
+    }
+
+    localStorage.setItem(STORAGE_KEY, FALLBACK_LANG);
+    return FALLBACK_LANG;
+}
+
+let currentLang = detectInitialLanguage();
 
 document.addEventListener('DOMContentLoaded', () => {
     applyLanguage(currentLang);
     updateLanguageButtons();
     initLeadForm();
     initHamburger();
+    initHeroCta();
+    initTestimonials();
+    initReveal();
 });
 
 document.getElementById('lang-pt').addEventListener('click', () => {
@@ -169,4 +193,149 @@ async function submitLead() {
 function showFeedback(el, type, message) {
     el.className = `lead-feedback ${type}`;
     el.textContent = message;
+}
+
+// ============================================================
+// ALUGIO — Scroll reveal
+// ============================================================
+
+function initReveal() {
+    const items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion || !('IntersectionObserver' in window)) {
+        items.forEach(el => el.classList.add('is-visible'));
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -5% 0px',
+    });
+
+    items.forEach(el => observer.observe(el));
+}
+
+// ============================================================
+// ALUGIO — Hero CTA smooth scroll
+// ============================================================
+
+function initHeroCta() {
+    const btn = document.getElementById('hero-cta');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        const target = document.getElementById('early-access');
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+}
+
+// ============================================================
+// ALUGIO — Testimonials Carousel
+// ============================================================
+
+function initTestimonials() {
+    const root = document.getElementById('testimonials-carousel');
+    if (!root) return;
+
+    const track = document.getElementById('testimonials-track');
+    const dotsContainer = document.getElementById('testimonials-dots');
+    const prev = root.querySelector('.carousel-arrow.prev');
+    const next = root.querySelector('.carousel-arrow.next');
+    const cards = Array.from(track.children);
+    if (!cards.length) return;
+
+    const AUTO_INTERVAL_MS = 10000;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    let page = 0;
+    let timer = null;
+
+    function perPage() {
+        return window.innerWidth <= 768 ? 1 : 3;
+    }
+
+    function pageCount() {
+        return Math.max(1, Math.ceil(cards.length / perPage()));
+    }
+
+    function renderDots() {
+        dotsContainer.innerHTML = '';
+        const count = pageCount();
+        for (let i = 0; i < count; i++) {
+            const dot = document.createElement('button');
+            dot.type = 'button';
+            dot.className = 'carousel-dot' + (i === page ? ' active' : '');
+            dot.setAttribute('aria-label', `Go to page ${i + 1}`);
+            dot.addEventListener('click', () => goTo(i, true));
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    function updateDotsActive() {
+        Array.from(dotsContainer.children).forEach((d, i) => {
+            d.classList.toggle('active', i === page);
+        });
+    }
+
+    function applyOffset() {
+        const offset = -(page * 100);
+        track.style.transform = `translateX(${offset}%)`;
+    }
+
+    function goTo(index, userInitiated) {
+        const count = pageCount();
+        page = ((index % count) + count) % count;
+        applyOffset();
+        updateDotsActive();
+        if (userInitiated) restartAuto();
+    }
+
+    function goNext(userInitiated) { goTo(page + 1, userInitiated); }
+    function goPrev(userInitiated) { goTo(page - 1, userInitiated); }
+
+    function startAuto() {
+        if (reducedMotion) return;
+        stopAuto();
+        timer = setInterval(() => goNext(false), AUTO_INTERVAL_MS);
+    }
+
+    function stopAuto() {
+        if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    function restartAuto() {
+        stopAuto();
+        startAuto();
+    }
+
+    prev.addEventListener('click', () => goPrev(true));
+    next.addEventListener('click', () => goNext(true));
+
+    root.addEventListener('mouseenter', stopAuto);
+    root.addEventListener('mouseleave', startAuto);
+    root.addEventListener('focusin', stopAuto);
+    root.addEventListener('focusout', startAuto);
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            const count = pageCount();
+            if (page >= count) page = count - 1;
+            renderDots();
+            applyOffset();
+        }, 150);
+    });
+
+    renderDots();
+    applyOffset();
+    startAuto();
 }
