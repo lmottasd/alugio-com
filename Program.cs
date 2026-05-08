@@ -1,8 +1,4 @@
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions
-{
-    Args = args,
-    WebRootPath = "."
-});
+var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
