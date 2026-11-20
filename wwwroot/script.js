@@ -231,10 +231,31 @@ function initReveal() {
 function initHeroCta() {
     const btn = document.getElementById('hero-cta');
     if (!btn) return;
-    btn.addEventListener('click', () => {
-        const target = document.getElementById('early-access');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    btn.addEventListener('click', () => scrollToSection('early-access'));
+}
+
+// Smooth-scroll to a section, then re-check once the scroll settles: images or
+// reveal animations below the fold can shift the layout mid-scroll and leave
+// the page short of the target.
+function scrollToSection(id) {
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    let settleTimer = null;
+    const correct = () => {
+        window.removeEventListener('scroll', onScroll);
+        const offset = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+        if (Math.abs(target.getBoundingClientRect().top - offset) > 4) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+    const onScroll = () => {
+        clearTimeout(settleTimer);
+        settleTimer = setTimeout(correct, 150);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    settleTimer = setTimeout(correct, 150);
 }
 
 // ============================================================

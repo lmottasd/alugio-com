@@ -946,6 +946,7 @@ section:has(.detail-row) {
 
 .ai-shot img {
     width: 100%;
+    height: auto;
     display: block;
     border-radius: var(--radius-lg);
     border: 1px solid rgba(167, 139, 250, 0.4);
