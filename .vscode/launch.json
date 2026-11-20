@@ -2,10 +2,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Attach to .NET Functions",
+            "name": "Run website",
             "type": "coreclr",
-            "request": "attach",
-            "processId": "${command:azureFunctions.pickProcess}"
+            "request": "launch",
+            "preLaunchTask": "build (website)",
+            "program": "${workspaceFolder}/bin/Debug/net8.0/alugio-com.dll",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5080"
+            },
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            }
         }
     ]
 }
