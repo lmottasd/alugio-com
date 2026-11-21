@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Abaixo-assinado Avenida Itacimirim</title>
+<meta name="description" content="Assine o pedido à Prefeitura de Camaçari por um redutor de velocidade na Avenida Itacimirim, próximo ao Condomínio Bioflora Residencial.">
+<meta property="og:title" content="Abaixo-assinado: redutor de velocidade na Av. Itacimirim">
+<meta property="og:description" content="Pedido à Prefeitura de Camaçari/BA por um redutor de velocidade antes da curva do Condomínio Bioflora Residencial. Assine on-line.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: a single document column (the petition as a typed letter) followed by the signature form; a road-sign band marks the top. */
+:root {
+  --paper: #fbfaf7;
+  --ink: #1d2320;
+  --muted: #5b625e;
+  --line: #d9dcd6;
+  --field: #ffffff;
+  --sign: #f2b705;      /* traffic-sign yellow */
+  --sign-ink: #1d1a10;
+  --green: #22634a;     /* Bioflora green, used for actions */
+  --green-ink: #ffffff;
+  --error: #b3261e;
+  --ok-bg: #e5f2ea;
+  --font-doc: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-ui: "Public Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #151917; --ink: #e8ebe7; --muted: #a3aaa5; --line: #2f3632; --field: #1d2220;
+    --sign: #f2b705; --sign-ink: #1d1a10; --green: #5cc296; --green-ink: #0c1f17;
+    --error: #ff8a80; --ok-bg: #1b3328; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #151917; --ink: #e8ebe7; --muted: #a3aaa5; --line: #2f3632; --field: #1d2220;
+  --sign: #f2b705; --sign-ink: #1d1a10; --green: #5cc296; --green-ink: #0c1f17;
+  --error: #ff8a80; --ok-bg: #1b3328; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font-family: var(--font-ui); font-size: 16px; line-height: 1.55;
+}
+a { color: var(--green); }
+:focus-visible { outline: 3px solid var(--sign); outline-offset: 2px; }
+
+.band {
+  background: var(--sign); color: var(--sign-ink);
+  padding-block: 14px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  border-bottom: 6px solid var(--sign-ink);
+}
+.band-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
+.band svg { flex: none; width: 44px; height: 44px; }
+.band p { margin: 0; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.02em; }
+.band small { display: block; font-weight: 500; font-size: 0.82rem; }
+
+main {
+  max-width: 720px; margin: 0 auto;
+  padding-block: 40px 64px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 48px;
+}
+
+.eyebrow { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h1 { font-family: var(--font-ui); font-weight: 800; font-size: clamp(1.7rem, 5vw, 2.4rem); line-height: 1.15; margin: 6px 0 0; text-wrap: balance; }
+h2 { font-family: var(--font-ui); font-size: 1.35rem; margin: 0; text-wrap: balance; }
+
+.counter { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-top: 18px; }
+.counter strong { font-size: 2rem; font-variant-numeric: tabular-nums; }
+.counter span { color: var(--muted); }
+.cta-jump { display: inline-block; margin-top: 18px; }
+
+/* Petition document */
+.doc {
+  font-family: var(--font-doc); font-size: 1.06rem; line-height: 1.7;
+  background: var(--field); border: 1px solid var(--line);
+  padding: clamp(20px, 5vw, 48px);
+}
+.doc h2 { font-family: var(--font-doc); font-size: 1.1rem; letter-spacing: 0.14em; text-align: center; margin-bottom: 4px; }
+.doc .sub { text-align: center; font-weight: 600; font-size: 0.98rem; letter-spacing: 0.04em; margin: 0 0 28px; }
+.doc p { margin: 0 0 1em; max-width: 65ch; }
+.doc .to p { margin: 0; }
+.doc .to { margin-bottom: 1.4em; }
+.doc ol { padding-left: 1.3em; margin: 0 0 1em; }
+.doc li { margin-bottom: 0.6em; }
+.doc .meta { margin-top: 1.6em; font-size: 0.98rem; }
+.doc .meta p { margin: 0 0 0.25em; }
+
+/* Form */
+.sign { display: grid; gap: 20px; }
+.sign-intro p { margin: 6px 0 0; color: var(--muted); max-width: 60ch; }
+form { display: grid; gap: 18px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 560px) { .row { grid-template-columns: 1fr; } }
+.f { display: grid; gap: 6px; min-width: 0; }
+label { font-weight: 600; font-size: 0.95rem; }
+.opt { font-weight: 400; color: var(--muted); }
+input[type="text"], input[type="email"], input[type="tel"], select {
+  width: 100%; font: inherit; color: var(--ink); background: var(--field);
+  border: 1.5px solid var(--line); border-radius: 6px; padding: 11px 12px; min-height: 46px;
+}
+input:focus, select:focus { border-color: var(--green); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--green) 25%, transparent); }
+.f.invalid input, .f.invalid select { border-color: var(--error); }
+.hint { font-size: 0.84rem; color: var(--muted); }
+.err { font-size: 0.84rem; color: var(--error); font-weight: 600; }
+.check { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start; font-weight: 400; font-size: 0.92rem; line-height: 1.5; }
+.check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--green); }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+button {
+  font: inherit; font-weight: 700; font-size: 1.05rem; cursor: pointer;
+  background: var(--green); color: var(--green-ink); border: 0; border-radius: 6px;
+  padding: 14px 22px; min-height: 52px; justify-self: start;
+}
+button:disabled { opacity: 0.6; cursor: wait; }
+.notice { border-radius: 6px; padding: 14px 16px; font-size: 0.95rem; }
+.notice.ok { background: var(--ok-bg); border: 1px solid var(--green); }
+.notice.bad { border: 1.5px solid var(--error); color: var(--error); }
+.notice.setup { border: 1.5px dashed var(--muted); color: var(--muted); }
+.share { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.share a, .share button {
+  font-size: 0.92rem; min-height: 40px; padding: 8px 14px; border-radius: 6px;
+  background: transparent; color: var(--green); border: 1.5px solid var(--green); text-decoration: none; font-weight: 600;
+  display: inline-flex; align-items: center;
+}
+
+.privacy { font-size: 0.86rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 18px; }
+.privacy p { margin: 0 0 0.6em; max-width: 70ch; }
+
+@media print {
+  .band, .sign, .cta-jump, .counter { display: none !important; }
+  body { background: #fff; color: #000; }
+  .doc { border: 0; padding: 0; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<div class="band" role="banner">
+  <div class="band-inner">
+    <!-- Brazilian warning sign: A-18 "saliência ou lombada" -->
+    <svg viewBox="0 0 44 44" aria-hidden="true">
+      <rect x="7" y="7" width="30" height="30" rx="3" transform="rotate(45 22 22)" fill="#f2b705" stroke="#1d1a10" stroke-width="2.5"/>
+      <path d="M12 26 h6 q4 -7 8 0 h6" fill="none" stroke="#1d1a10" stroke-width="2.6" stroke-linecap="round"/>
+    </svg>
+    <p>Av. Itacimirim, nº 55 · Camaçari/BA<small>Acesso ao Condomínio Bioflora Residencial</small></p>
+  </div>
+</div>
+
+<main>
+  <header>
+    <p class="eyebrow">Abaixo-assinado</p>
+    <h1>Redutor de velocidade antes da curva do Bioflora</h1>
+    <div class="counter" aria-live="polite">
+      <strong id="count">–</strong><span id="count-label">assinaturas até agora</span>
+    </div>
+    <a class="cta-jump" href="#assinar">Ir direto para o formulário de assinatura</a>
+  </header>
+
+  <article class="doc" aria-labelledby="doc-title">
+    <h2 id="doc-title">ABAIXO-ASSINADO</h2>
+    <p class="sub">SOLICITAÇÃO DE INSTALAÇÃO DE REDUTOR DE VELOCIDADE</p>
+
+    <div class="to">
+      <p>À Prefeitura Municipal de Camaçari/BA</p>
+      <p>Ao órgão municipal responsável pelo trânsito e pela segurança viária</p>
+    </div>
+
+    <p><strong>Assunto:</strong> Solicitação urgente de redutor de velocidade na Avenida Itacimirim, próximo ao acesso ao Condomínio Bioflora Residencial.</p>
+
+    <p>Nós, abaixo-assinados, moradores, proprietários, visitantes e demais usuários da Avenida Itacimirim, no município de Camaçari/BA, vimos solicitar a instalação de um redutor de velocidade (quebra-molas), ou outra medida de segurança viária tecnicamente adequada, antes da curva que antecede a entrada do Condomínio Bioflora Residencial, localizado na Avenida Itacimirim, nº 55, Camaçari/BA.</p>
+
+    <p>A presente solicitação fundamenta-se na preocupação crescente com a segurança de todos que transitam pelo local, considerando que:</p>
+
+    <ol>
+      <li><strong>Excesso de velocidade:</strong> Diversos veículos trafegam pelo trecho em alta velocidade, aumentando significativamente os riscos de acidentes.</li>
+      <li><strong>Curva perigosa:</strong> A configuração da via, especialmente a curva próxima à entrada do condomínio, exige maior atenção e redução de velocidade por parte dos motoristas.</li>
+      <li><strong>Histórico de acidentes:</strong> Segundo relatos de moradores, já ocorreram diversas colisões e acidentes nas proximidades, evidenciando a necessidade de uma intervenção preventiva.</li>
+      <li><strong>Segurança de moradores e visitantes:</strong> O acesso ao Condomínio Bioflora Residencial é utilizado diariamente por moradores, prestadores de serviços, visitantes e pedestres, todos expostos aos riscos provocados pela velocidade excessiva dos veículos.</li>
+    </ol>
+
+    <p>Diante desses fatos, solicitamos à Prefeitura Municipal de Camaçari uma vistoria técnica com caráter de urgência, visando à instalação de um redutor de velocidade antes da referida curva, acompanhado da sinalização adequada e de outras medidas que os responsáveis técnicos considerem necessárias.</p>
+
+    <p>Nosso objetivo é prevenir novos acidentes, proteger vidas e proporcionar maior segurança a todos que utilizam a Avenida Itacimirim.</p>
+
+    <p>Entendemos que medidas preventivas adotadas hoje podem evitar consequências graves no futuro.</p>
+
+    <p>Certos da atenção do poder público, aguardamos uma avaliação e a adoção das providências cabíveis.</p>
+
+    <div class="meta">
+      <p>Camaçari/BA, ____ de ______________ de 2026.</p>
+      <p>Condomínio: Bioflora Residencial</p>
+      <p>Endereço: Avenida Itacimirim, nº 55, Camaçari/BA</p>
+      <p>Associação de Moradores: __________________________________</p>
+      <p>Representante: __________________________________</p>
+      <p>Telefone/E-mail: __________________________________</p>
+    </div>
+  </article>
+
+  <section class="sign" id="assinar" aria-labelledby="sign-title">
+    <div class="sign-intro">
+      <h2 id="sign-title">Assine o pedido</h2>
+      <p>Cada pessoa assina uma vez. Nome completo e CPF identificam o signatário perante a Prefeitura; o endereço mostra a sua relação com a via.</p>
+    </div>
+
+    <div id="setup-notice" class="notice setup" hidden>
+      O formulário ainda não está ligado à planilha de assinaturas. O organizador precisa preencher o endereço do Google Apps Script neste arquivo (variável <code>SCRIPT_URL</code>).
+    </div>
+
+    <form id="petition" novalidate>
+      <div class="f" data-field="nome">
+        <label for="nome">Nome completo</label>
+        <input type="text" id="nome" name="nome" autocomplete="name" maxlength="120" required>
+        <span class="err" hidden></span>
+      </div>
+
+      <div class="row">
+        <div class="f" data-field="cpf">
+          <label for="cpf">CPF</label>
+          <input type="text" id="cpf" name="cpf" inputmode="numeric" autocomplete="off" placeholder="000.000.000-00" maxlength="14" required>
+          <span class="err" hidden></span>
+        </div>
+        <div class="f" data-field="telefone">
+          <label for="telefone">Telefone / WhatsApp</label>
+          <input type="tel" id="telefone" name="telefone" inputmode="tel" autocomplete="tel" placeholder="(71) 90000-0000" maxlength="16" required>
+          <span class="err" hidden></span>
+        </div>
+      </div>
+
+      <div class="f" data-field="email">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" autocomplete="email" maxlength="150" required>
+        <span class="err" hidden></span>
+      </div>
+
+      <div class="row">
+        <div class="f" data-field="endereco">
+          <label for="endereco">Endereço <span class="opt">(rua/condomínio e nº ou unidade)</span></label>
+          <input type="text" id="endereco" name="endereco" autocomplete="street-address" maxlength="160" required>
+          <span class="err" hidden></span>
+        </div>
+        <div class="f" data-field="cidade">
+          <label for="cidade">Cidade/UF</label>
+          <input type="text" id="cidade" name="cidade" autocomplete="address-level2" value="Camaçari/BA" maxlength="80" required>
+          <span class="err" hidden></span>
+        </div>
+      </div>
+
+      <div class="f" data-field="vinculo">
+        <label for="vinculo">Relação com a Avenida Itacimirim</label>
+        <select id="vinculo" name="vinculo" required>
+          <option value="">Selecione</option>
+          <option>Morador(a) do Bioflora Residencial</option>
+          <option>Proprietário(a) no Bioflora Residencial</option>
+          <option>Morador(a) da região</option>
+          <option>Visitante ou hóspede</option>
+          <option>Prestador(a) de serviço</option>
+          <option>Usuário(a) da via</option>
+        </select>
+        <span class="err" hidden></span>
+      </div>
+
+      <div class="hp" aria-hidden="true">
+        <label for="website">Não preencha</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="f" data-field="consent">
+        <label class="check" for="consent">
+          <input type="checkbox" id="consent" name="consent" required>
+          <span>Declaro que as informações são verdadeiras, que apoio este abaixo-assinado e autorizo o uso dos meus dados exclusivamente para entregá-lo à Prefeitura Municipal de Camaçari e ao órgão de trânsito responsável, conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018).</span>
+        </label>
+        <span class="err" hidden></span>
+      </div>
+
+      <button type="submit" id="submit">Assinar o abaixo-assinado</button>
+      <div id="result" aria-live="polite"></div>
+    </form>
+
+    <div class="privacy">
+      <p><strong>Como seus dados são usados.</strong> Os dados ficam numa planilha acessível apenas aos organizadores. A lista de assinaturas será anexada ao documento protocolado na Prefeitura de Camaçari. Seu CPF, telefone e e-mail não aparecem nesta página e não serão usados para outra finalidade.</p>
+      <p>Para retirar sua assinatura antes do protocolo, fale com os organizadores do Condomínio Bioflora Residencial.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+// ============================================================
+// Endereço do Web App do Google Apps Script (veja LEIA-ME.md).
+// Cole aqui a URL que termina em /exec.
+// ============================================================
+const SCRIPT_URL = '';
+
+const $ = (id) => document.getElementById(id);
+const form = $('petition');
+
+function onlyDigits(s) { return (s || '').replace(/\D/g, ''); }
+
+function validCPF(raw) {
+  const c = onlyDigits(raw);
+  if (c.length !== 11 || /^(\d)\1{10}$/.test(c)) return false;
+  for (let t = 9; t < 11; t++) {
+    let sum = 0;
+    for (let i = 0; i < t; i++) sum += Number(c[i]) * (t + 1 - i);
+    const d = ((sum * 10) % 11) % 10;
+    if (d !== Number(c[t])) return false;
+  }
+  return true;
+}
+
+function maskCPF(v) {
+  const d = onlyDigits(v).slice(0, 11);
+  return d.replace(/^(\d{3})(\d)/, '$1.$2')
+          .replace(/^(\d{3})\.(\d{3})(\d)/, '$1.$2.$3')
+          .replace(/\.(\d{3})(\d{1,2})$/, '.$1-$2');
+}
+function maskPhone(v) {
+  const d = onlyDigits(v).slice(0, 11);
+  if (d.length <= 2) return d.length ? '(' + d : '';
+  if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+  if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+  return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+}
+$('cpf').addEventListener('input', (e) => { e.target.value = maskCPF(e.target.value); });
+$('telefone').addEventListener('input', (e) => { e.target.value = maskPhone(e.target.value); });
+
+function setError(field, msg) {
+  const box = form.querySelector('[data-field="' + field + '"]');
+  const err = box.querySelector('.err');
+  box.classList.toggle('invalid', !!msg);
+  err.textContent = msg || '';
+  err.hidden = !msg;
+}
+
+function validate(d) {
+  const errors = {};
+  if (d.nome.split(/\s+/).filter(Boolean).length < 2) errors.nome = 'Escreva nome e sobrenome.';
+  if (!validCPF(d.cpf)) errors.cpf = 'CPF inválido. Confira os 11 números.';
+  const tel = onlyDigits(d.telefone);
+  if (tel.length < 10 || tel.length > 11) errors.telefone = 'Informe DDD e número.';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.email)) errors.email = 'Informe um e-mail válido.';
+  if (d.endereco.length < 4) errors.endereco = 'Informe seu endereço.';
+  if (d.cidade.length < 3) errors.cidade = 'Informe cidade e estado.';
+  if (!d.vinculo) errors.vinculo = 'Escolha uma opção.';
+  if (!d.consent) errors.consent = 'Marque a declaração para assinar.';
+  return errors;
+}
+
+function showResult(kind, html) {
+  $('result').innerHTML = '<div class="notice ' + kind + '">' + html + '</div>';
+}
+
+function setCount(n) {
+  if (typeof n !== 'number' || isNaN(n)) return;
+  $('count').textContent = n.toLocaleString('pt-BR');
+  $('count-label').textContent = n === 1 ? 'assinatura até agora' : 'assinaturas até agora';
+}
+
+async function loadCount() {
+  if (!SCRIPT_URL) { $('count').textContent = '0'; return; }
+  try {
+    const r = await fetch(SCRIPT_URL + '?action=count');
+    const j = await r.json();
+    setCount(j.count);
+  } catch { /* contador é opcional */ }
+}
+
+if (!SCRIPT_URL) $('setup-notice').hidden = false;
+loadCount();
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const d = {
+    nome: $('nome').value.trim().replace(/\s+/g, ' '),
+    cpf: $('cpf').value.trim(),
+    telefone: $('telefone').value.trim(),
+    email: $('email').value.trim().toLowerCase(),
+    endereco: $('endereco').value.trim(),
+    cidade: $('cidade').value.trim(),
+    vinculo: $('vinculo').value,
+    consent: $('consent').checked,
+    website: $('website').value
+  };
+  const errors = validate(d);
+  ['nome','cpf','telefone','email','endereco','cidade','vinculo','consent'].forEach((f) => setError(f, errors[f]));
+  const first = Object.keys(errors)[0];
+  if (first) {
+    const el = first === 'consent' ? $('consent') : $(first);
+    el.focus();
+    showResult('bad', 'Corrija os campos destacados e envie novamente.');
+    return;
+  }
+  if (!SCRIPT_URL) {
+    showResult('bad', 'O formulário ainda não está ligado à planilha. Avise o organizador.');
+    return;
+  }
+
+  const btn = $('submit');
+  btn.disabled = true; btn.textContent = 'Enviando assinatura...';
+  $('result').innerHTML = '';
+  try {
+    // text/plain evita a verificação CORS prévia que o Apps Script não responde
+    const r = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(Object.assign({}, d, { cpf: onlyDigits(d.cpf), telefone: onlyDigits(d.telefone) }))
+    });
+    const j = await r.json();
+    if (j.ok) {
+      setCount(j.count);
+      form.reset();
+      $('cidade').value = 'Camaçari/BA';
+      const url = location.href.split('#')[0];
+      const msg = encodeURIComponent('Assine o abaixo-assinado por um redutor de velocidade na Av. Itacimirim, perto do Bioflora: ' + url);
+      showResult('ok', '<strong>Assinatura registrada. Obrigado!</strong> Você é o signatário nº ' + Number(j.count).toLocaleString('pt-BR') + '. Ajude a divulgar:' +
+        '<div class="share"><a href="https://wa.me/?text=' + msg + '" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>' +
+        '<button type="button" id="copy-link">Copiar link</button></div>');
+      $('copy-link').addEventListener('click', async (ev) => {
+        try { await navigator.clipboard.writeText(url); ev.target.textContent = 'Link copiado'; }
+        catch { ev.target.textContent = url; }
+      });
+    } else if (j.error === 'duplicate') {
+      showResult('bad', 'Este CPF já assinou o abaixo-assinado. Cada pessoa pode assinar uma vez.');
+      setError('cpf', 'CPF já registrado.');
+    } else {
+      showResult('bad', 'Não foi possível registrar: ' + (j.message || 'erro desconhecido') + '. Tente de novo em instantes.');
+    }
+  } catch {
+    showResult('bad', 'Sem conexão com a planilha de assinaturas. Verifique sua internet e tente de novo.');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Assinar o abaixo-assinado';
+  }
+});
+</script>
+</body>
+</html>
